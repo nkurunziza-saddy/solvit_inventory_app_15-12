@@ -8,8 +8,9 @@
   </head>
   <body>
     <header class="navbar">
-      <h3 class="logo">logo</h3>
+      <h3 class="logo">Inventory</h3>
       <nav class="nav-links">
+        <button class="btn" id="logout-btn">Logout</button>
         <button class="btn" id="theme-toggle">Toggle</button>
       </nav>
     </header>
@@ -25,6 +26,7 @@
           <option value="">All Status</option>
           <option value="Available">Available</option>
           <option value="Out of Stock">Out of Stock</option>
+          <option value="Pending">Pending</option>
         </select>
       </div>
 
@@ -60,6 +62,14 @@
               <label>Price</label>
               <input type="number" id="edit-product-price" />
             </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="edit-product-status">
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
             <button type="submit" class="btn btn-large">Edit Product</button>
           </form>
         </div>
@@ -84,6 +94,14 @@
               <div class="form-group">
                 <label>Price</label>
                 <input type="number" id="product-price" />
+              </div>
+              <div class="form-group">
+                <label>Status</label>
+                <select id="product-status">
+                  <option value="Available">Available</option>
+                  <option value="Out of Stock">Out of Stock</option>
+                  <option value="Pending">Pending</option>
+                </select>
               </div>
               <button type="submit" class="btn btn-large">Add Product</button>
             </form>

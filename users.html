@@ -4,20 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Users</title>
+    <title>USers</title>
   </head>
   <body>
     <header class="navbar">
-      <h3 class="logo">logo</h3>
+      <h3 class="logo">Admin Panel</h3>
       <nav class="nav-links">
-        <a href="admin.html">products</a>
-        <a href="users.html">users</a>
-
-        <button class="theme-toggle-btn" id="theme-toggle">Toggle</button>
+        <a href="admin.html">Products</a>
+        <a href="users.html">Users</a>
+        <button class="btn" id="logout-btn">Logout</button>
+        <button class="btn" id="theme-toggle">Toggle</button>
       </nav>
     </header>
     <div class="main">
-      <h4 class="title">users</h4>
+      <div class="between">
+        <h4 class="title">Manage Users</h4>
+        <button class="btn" id="open-create-user-dialog">+ Add User</button>
+      </div>
 
       <table>
         <thead>
@@ -25,11 +28,70 @@
             <th>Id</th>
             <th>Full Name</th>
             <th>Username</th>
-            <th>Tel</th>
+            <th>Phone</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="users-tbody"></tbody>
       </table>
+
+      <div class="dialog hidden" id="create-user-dialog">
+        <div class="dialog-overlay"></div>
+        <div class="dialog-content">
+          <span class="btn close-btn" id="close-create-user-dialog">X</span>
+          <div class="form-header">
+            <h2>Add New User</h2>
+          </div>
+          <form id="admin-create-user-form">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="new-username" />
+            </div>
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="new-full-name" />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" id="new-tel" />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" id="new-password" />
+            </div>
+            <button type="submit" class="btn btn-large">Create User</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="dialog hidden" id="edit-user-dialog">
+        <div class="dialog-overlay"></div>
+        <div class="dialog-content">
+          <span class="btn close-btn" id="close-edit-user-dialog">X</span>
+          <div class="form-header">
+            <h2>Edit User</h2>
+          </div>
+          <form id="edit-user-form">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="edit-username" />
+            </div>
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="edit-full-name" />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" id="edit-tel" />
+            </div>
+            <div class="form-group">
+              <label>New Password (leave blank to keep current)</label>
+              <input type="password" id="edit-password" />
+            </div>
+            <button type="submit" class="btn btn-large">Save Changes</button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

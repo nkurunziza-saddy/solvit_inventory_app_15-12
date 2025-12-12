@@ -171,16 +171,24 @@ const openEditDialog = (index) => {
   };
 };
 
-const loadProducts = () => {
+const loadProducts = (searchQuery = "", statusFilter = "") => {
   const products = storage.get("products");
   const userProducts = isAdmin
     ? products
     : products.filter((p) => p.createdBy === loggedInUser.username);
 
+  const filtered = userProducts.filter((product) => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesStatus = !statusFilter || product.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
   const tbody = $("products-tbody");
   if (!tbody) return;
 
-  tbody.innerHTML = userProducts
+  tbody.innerHTML = filtered
     .map(
       (product, i) => `
     <tr>
@@ -190,14 +198,27 @@ const loadProducts = () => {
       <td>${product.price.toFixed(2)} rwf</td>
       <td>${product.quantity}</td>
       <td>
-        <button class="btn btn-small" onclick="openEditDialog(${i})">Edit</button>
-        <button class="btn btn-small" onclick="deleteProduct(${i})">Delete</button>
+        <button class="btn btn-small" onclick="openEditDialog(${products.indexOf(
+          product
+        )})">Edit</button>
+        <button class="btn btn-small" onclick="deleteProduct(${products.indexOf(
+          product
+        )})">Delete</button>
       </td>
     </tr>
   `
     )
     .join("");
 };
+
+const applyFilters = () => {
+  const searchQuery = $("search-input")?.value || "";
+  const statusFilter = $("status-filter")?.value || "";
+  loadProducts(searchQuery, statusFilter);
+};
+
+$("search-input")?.addEventListener("input", applyFilters);
+$("status-filter")?.addEventListener("change", applyFilters);
 
 const loadUsers = () => {
   const tbody = $("users-tbody");

@@ -121,6 +121,27 @@ form {
   gap: 4px;
 }
 
+select {
+  padding: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: var(--border-small);
+  outline: none;
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.filters input {
+  flex: 1;
+}
+
 .flex-center {
   display: flex;
   align-items: center;

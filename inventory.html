@@ -10,13 +10,13 @@
     <header class="navbar">
       <h3 class="logo">logo</h3>
       <nav class="nav-links">
-        <button class="theme-toggle-btn" id="theme-toggle">Toggle</button>
+        <button class="btn" id="theme-toggle">Toggle</button>
       </nav>
     </header>
     <div class="main">
       <div class="between">
         <h4 class="title">your products</h4>
-        <button class="add-btn" id="open-create-product-dialog">+</button>
+        <button class="btn" id="open-create-product-dialog">+</button>
       </div>
 
       <table>
@@ -36,7 +36,7 @@
       <div class="dialog hidden" id="edit-dialog">
         <div class="dialog-overlay"></div>
         <div class="dialog-content">
-          <span class="close-btn" id="close-edit-dialog">X</span>
+          <span class="btn close-btn" id="close-edit-dialog">X</span>
           <form id="edit-product-form">
             <h3 class="title">edit product</h3>
             <div class="form-group">
@@ -51,14 +51,14 @@
               <label>Price</label>
               <input type="number" id="edit-product-price" />
             </div>
-            <button type="submit" class="submit-btn">Edit Product</button>
+            <button type="submit" class="btn btn-large">Edit Product</button>
           </form>
         </div>
       </div>
       <div class="dialog hidden" id="create-product-dialog">
         <div class="dialog-overlay"></div>
         <div class="dialog-content">
-          <span class="close-btn" id="close-create-product-dialog">X</span>
+          <span class="btn close-btn" id="close-create-product-dialog">X</span>
           <div class="">
             <div class="form-header">
               <h2>create product</h2>
@@ -76,7 +76,7 @@
                 <label>Price</label>
                 <input type="number" id="product-price" />
               </div>
-              <button type="submit" class="submit-btn">Add Product</button>
+              <button type="submit" class="btn btn-large">Add Product</button>
             </form>
           </div>
         </div>

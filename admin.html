@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Admin</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <h3 class="logo">logo</h3>
+      <nav class="nav-links">
+        <a href="admin.html">products</a>
+        <a href="users.html">users</a>
+
+        <button class="theme-toggle-btn" id="theme-toggle">Toggle</button>
+      </nav>
+    </header>
+    <div class="main">
+      <div class="between">
+        <h4 class="title">all products</h4>
+        <button class="add-btn" id="open-create-product-dialog">+</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="products-tbody"></tbody>
+      </table>
+
+      <div class="dialog hidden" id="edit-dialog">
+        <div class="dialog-overlay"></div>
+        <div class="dialog-content">
+          <span class="close-btn" id="close-edit-dialog">X</span>
+          <form id="edit-product-form">
+            <h3 class="title">edit product</h3>
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" id="edit-product-name" />
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" id="edit-product-quantity" />
+            </div>
+            <div class="form-group">
+              <label>Price</label>
+              <input type="number" id="edit-product-price" />
+            </div>
+            <button type="submit" class="submit-btn">Edit Product</button>
+          </form>
+        </div>
+      </div>
+      <div class="dialog hidden" id="create-product-dialog">
+        <div class="dialog-overlay"></div>
+        <div class="dialog-content">
+          <span class="close-btn" id="close-create-product-dialog">X</span>
+          <div class="">
+            <div class="form-header">
+              <h2>create product</h2>
+            </div>
+            <form id="create-product-form">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="product-name" />
+              </div>
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" id="product-quantity" />
+              </div>
+              <div class="form-group">
+                <label>Price</label>
+                <input type="number" id="product-price" />
+              </div>
+              <button type="submit" class="submit-btn">Add Product</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -9,21 +9,17 @@ const storage = {
   },
 };
 
-const init_admin = () => {
-  const users = storage.get("users");
-  const adminExists = users.some((u) => u.role === "admin");
-  if (!adminExists) {
-    storage.insert("users", {
-      username: "admin",
-      full_name: "Administrator",
-      tel: "0000000000",
-      password: "admin123",
-      role: "admin",
-    });
-  }
-};
-init_admin();
-
+const users = storage.get("users");
+const adminExists = users.some((u) => u.role === "admin");
+if (!adminExists) {
+  storage.insert("users", {
+    username: "admin",
+    full_name: "Administrator",
+    tel: "0000000000",
+    password: "admin123",
+    role: "admin",
+  });
+}
 const ge_by_id = (id) => document.getElementById(id);
 const currentPage = window.location.pathname.split("/").pop();
 

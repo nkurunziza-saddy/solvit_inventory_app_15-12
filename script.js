@@ -9,7 +9,7 @@ const storage = {
   },
 };
 
-const initAdmin = () => {
+const init_admin = () => {
   const users = storage.get("users");
   const adminExists = users.some((u) => u.role === "admin");
   if (!adminExists) {
@@ -22,9 +22,9 @@ const initAdmin = () => {
     });
   }
 };
-initAdmin();
+init_admin();
 
-const $ = (id) => document.getElementById(id);
+const ge_by_id = (id) => document.getElementById(id);
 const currentPage = window.location.pathname.split("/").pop();
 
 const loggedInUser = storage.get("logged-in");
@@ -44,27 +44,25 @@ if (isLoggedIn) {
   window.location.href = "login.html";
 }
 
-const initTheme = () => {
-  const theme = storage.get("theme") || "light";
-  document.body.classList.toggle("dark", theme === "dark");
-};
-
-const toggleTheme = () => {
+const toggle_theme = () => {
   const newTheme = storage.get("theme") === "dark" ? "light" : "dark";
   storage.set("theme", newTheme);
   document.body.classList.toggle("dark");
 };
 
-$("theme-toggle")?.addEventListener("click", toggleTheme);
+ge_by_id("theme-toggle")?.addEventListener("click", toggle_theme);
 
 document.addEventListener("keydown", (e) => {
   if ((e.ctrlKey && e.key === "d") || (e.altKey && e.key === "t")) {
     e.preventDefault();
-    toggleTheme();
+    toggle_theme();
   }
 });
 
-initTheme();
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = storage.get("theme") || "light";
+  document.body.classList.add(saved);
+});
 
 const isLettersOnly = (str) => /^[a-zA-Z\s]+$/.test(str);
 
@@ -79,14 +77,14 @@ const login = (username, password) => {
   return { user };
 };
 
-$("register-form")?.addEventListener("submit", (e) => {
+ge_by_id("register-form")?.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const formData = {
-    username: $("username").value.trim(),
-    full_name: $("full_name").value.trim(),
-    tel: $("tel").value.trim(),
-    password: $("password").value,
+    username: ge_by_id("username").value.trim(),
+    full_name: ge_by_id("full_name").value.trim(),
+    tel: ge_by_id("tel").value.trim(),
+    password: ge_by_id("password").value,
   };
 
   const { username, full_name, tel, password } = formData;
@@ -114,10 +112,10 @@ $("register-form")?.addEventListener("submit", (e) => {
   window.location.href = "login.html";
 });
 
-$("login-form")?.addEventListener("submit", (e) => {
+ge_by_id("login-form")?.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const result = login($("username").value, $("password").value);
+  const result = login(ge_by_id("username").value, ge_by_id("password").value);
 
   if (result.error) return alert(result.error);
 
@@ -126,7 +124,7 @@ $("login-form")?.addEventListener("submit", (e) => {
     result.user.role === "admin" ? "admin.html" : "inventory.html";
 });
 
-$("logout-btn")?.addEventListener("click", () => {
+ge_by_id("logout-btn")?.addEventListener("click", () => {
   storage.remove("logged-in");
   alert("Logged out successfully!");
   window.location.href = "login.html";
@@ -148,26 +146,26 @@ const editProduct = (index, updatedData) => {
   saveProducts(products);
 };
 
-const showDialog = (id) => $(id)?.classList.remove("hidden");
-const hideDialog = (id) => $(id)?.classList.add("hidden");
+const showDialog = (id) => ge_by_id(id)?.classList.remove("hidden");
+const hideDialog = (id) => ge_by_id(id)?.classList.add("hidden");
 
-$("open-create-product-dialog")?.addEventListener("click", () =>
+ge_by_id("open-create-product-dialog")?.addEventListener("click", () =>
   showDialog("create-product-dialog")
 );
-$("close-create-product-dialog")?.addEventListener("click", () =>
+ge_by_id("close-create-product-dialog")?.addEventListener("click", () =>
   hideDialog("create-product-dialog")
 );
-$("close-edit-dialog")?.addEventListener("click", () =>
+ge_by_id("close-edit-dialog")?.addEventListener("click", () =>
   hideDialog("edit-dialog")
 );
 
-$("create-product-form")?.addEventListener("submit", (e) => {
+ge_by_id("create-product-form")?.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const name = $("product-name").value.trim();
-  const price = parseFloat($("product-price").value);
-  const quantity = parseInt($("product-quantity").value, 10);
-  const status = $("product-status")?.value || "Available";
+  const name = ge_by_id("product-name").value.trim();
+  const price = parseFloat(ge_by_id("product-price").value);
+  const quantity = parseInt(ge_by_id("product-quantity").value, 10);
+  const status = ge_by_id("product-status")?.value || "Available";
 
   if (!name || !isLettersOnly(name)) {
     return alert("Product name must contain only letters and cannot be empty.");
@@ -197,20 +195,20 @@ const openEditDialog = (index) => {
   const products = storage.get("products");
   const product = products[index];
 
-  $("edit-product-name").value = product.name;
-  $("edit-product-price").value = product.price;
-  $("edit-product-quantity").value = product.quantity;
-  if ($("edit-product-status")) {
-    $("edit-product-status").value = product.status;
+  ge_by_id("edit-product-name").value = product.name;
+  ge_by_id("edit-product-price").value = product.price;
+  ge_by_id("edit-product-quantity").value = product.quantity;
+  if (ge_by_id("edit-product-status")) {
+    ge_by_id("edit-product-status").value = product.status;
   }
 
-  $("edit-product-form").onsubmit = (e) => {
+  ge_by_id("edit-product-form").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const name = $("edit-product-name").value.trim();
-    const price = parseFloat($("edit-product-price").value);
-    const quantity = parseInt($("edit-product-quantity").value, 10);
-    const status = $("edit-product-status")?.value || product.status;
+    const name = ge_by_id("edit-product-name").value.trim();
+    const price = parseFloat(ge_by_id("edit-product-price").value);
+    const quantity = parseInt(ge_by_id("edit-product-quantity").value, 10);
+    const status = ge_by_id("edit-product-status")?.value || product.status;
 
     if (!name || !isLettersOnly(name)) {
       return alert("Product name must contain only letters.");
@@ -225,7 +223,7 @@ const openEditDialog = (index) => {
     editProduct(index, { ...product, name, price, quantity, status });
     alert("Product updated successfully!");
     window.location.reload();
-  };
+  });
 };
 
 const loadProducts = (searchQuery = "", statusFilter = "", userFilter = "") => {
@@ -243,7 +241,7 @@ const loadProducts = (searchQuery = "", statusFilter = "", userFilter = "") => {
     return matchesSearch && matchesStatus && matchesUser;
   });
 
-  const tbody = $("products-tbody");
+  const tbody = ge_by_id("products-tbody");
   if (!tbody) return;
 
   const showOwner = isAdmin && currentPage === "admin.html";
@@ -269,7 +267,7 @@ const loadProducts = (searchQuery = "", statusFilter = "", userFilter = "") => {
     .join("");
 };
 
-$("products-tbody")?.addEventListener("click", (e) => {
+ge_by_id("products-tbody")?.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-action]");
   if (!btn) return;
 
@@ -284,18 +282,18 @@ $("products-tbody")?.addEventListener("click", (e) => {
 });
 
 const applyFilters = () => {
-  const searchQuery = $("search-input")?.value || "";
-  const statusFilter = $("status-filter")?.value || "";
-  const userFilter = $("user-filter")?.value || "";
+  const searchQuery = ge_by_id("search-input")?.value || "";
+  const statusFilter = ge_by_id("status-filter")?.value || "";
+  const userFilter = ge_by_id("user-filter")?.value || "";
   loadProducts(searchQuery, statusFilter, userFilter);
 };
 
-$("search-input")?.addEventListener("input", applyFilters);
-$("status-filter")?.addEventListener("change", applyFilters);
-$("user-filter")?.addEventListener("change", applyFilters);
+ge_by_id("search-input")?.addEventListener("input", applyFilters);
+ge_by_id("status-filter")?.addEventListener("change", applyFilters);
+ge_by_id("user-filter")?.addEventListener("change", applyFilters);
 
 const populateUserFilter = () => {
-  const select = $("user-filter");
+  const select = ge_by_id("user-filter");
   if (!select) return;
 
   const users = storage.get("users").filter((u) => u.role !== "admin");
@@ -309,7 +307,7 @@ const populateUserFilter = () => {
 let editingUserIndex = null;
 
 const loadUsers = () => {
-  const tbody = $("users-tbody");
+  const tbody = ge_by_id("users-tbody");
   if (!tbody) return;
 
   const allUsers = storage.get("users");
@@ -334,7 +332,7 @@ const loadUsers = () => {
     .join("");
 };
 
-$("users-tbody")?.addEventListener("click", (e) => {
+ge_by_id("users-tbody")?.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-action]");
   if (!btn) return;
 
@@ -348,20 +346,20 @@ $("users-tbody")?.addEventListener("click", (e) => {
   }
 });
 
-$("open-create-user-dialog")?.addEventListener("click", () =>
+ge_by_id("open-create-user-dialog")?.addEventListener("click", () =>
   showDialog("create-user-dialog")
 );
-$("close-create-user-dialog")?.addEventListener("click", () =>
+ge_by_id("close-create-user-dialog")?.addEventListener("click", () =>
   hideDialog("create-user-dialog")
 );
 
-$("admin-create-user-form")?.addEventListener("submit", (e) => {
+ge_by_id("admin-create-user-form")?.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const username = $("new-username").value.trim();
-  const full_name = $("new-full-name").value.trim();
-  const tel = $("new-tel").value.trim();
-  const password = $("new-password").value;
+  const username = ge_by_id("new-username").value.trim();
+  const full_name = ge_by_id("new-full-name").value.trim();
+  const tel = ge_by_id("new-tel").value.trim();
+  const password = ge_by_id("new-password").value;
 
   if (!isLettersOnly(full_name)) {
     return alert("Full name must contain only letters.");
@@ -386,7 +384,7 @@ $("admin-create-user-form")?.addEventListener("submit", (e) => {
   window.location.reload();
 });
 
-$("close-edit-user-dialog")?.addEventListener("click", () =>
+ge_by_id("close-edit-user-dialog")?.addEventListener("click", () =>
   hideDialog("edit-user-dialog")
 );
 
@@ -398,13 +396,13 @@ const openEditUserDialog = (index) => {
   const users = storage.get("users");
   const user = users[index];
 
-  $("edit-username").value = user.username;
-  $("edit-full-name").value = user.full_name;
-  $("edit-tel").value = user.tel;
-  $("edit-password").value = "";
+  ge_by_id("edit-username").value = user.username;
+  ge_by_id("edit-full-name").value = user.full_name;
+  ge_by_id("edit-tel").value = user.tel;
+  ge_by_id("edit-password").value = "";
 };
 
-$("edit-user-form")?.addEventListener("submit", (e) => {
+ge_by_id("edit-user-form")?.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const users = storage.get("users");
@@ -412,10 +410,10 @@ $("edit-user-form")?.addEventListener("submit", (e) => {
   console.log(user);
   const oldUsername = user.username;
 
-  const username = $("edit-username").value.trim();
-  const full_name = $("edit-full-name").value.trim();
-  const tel = $("edit-tel").value.trim();
-  const password = $("edit-password").value || user.password;
+  const username = ge_by_id("edit-username").value.trim();
+  const full_name = ge_by_id("edit-full-name").value.trim();
+  const tel = ge_by_id("edit-tel").value.trim();
+  const password = ge_by_id("edit-password").value || user.password;
 
   if (!isLettersOnly(full_name)) {
     return alert("Full name must contain only letters.");
@@ -462,10 +460,10 @@ const deleteUser = (index) => {
   window.location.reload();
 };
 
-if ($("products-tbody")) {
+if (ge_by_id("products-tbody")) {
   populateUserFilter();
   loadProducts();
 }
-if ($("users-tbody")) {
+if (ge_by_id("users-tbody")) {
   loadUsers();
 }

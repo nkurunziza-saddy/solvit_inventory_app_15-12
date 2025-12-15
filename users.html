@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>USers</title>
+    <title>Users</title>
   </head>
   <body>
     <header class="navbar">
-      <h3 class="logo">Admin Panel</h3>
+      <div class="logo">Admin Panel</div>
       <nav class="nav-links">
         <a href="admin.html">Products</a>
         <a href="users.html">Users</a>
+        <button class="btn btn-outline" id="theme-toggle">Change theme</button>
         <button class="btn" id="logout-btn">Logout</button>
-        <button class="btn" id="theme-toggle">Toggle</button>
       </nav>
     </header>
     <div class="main">
@@ -25,7 +25,7 @@
       <table>
         <thead>
           <tr>
-            <th>Id</th>
+            <th>#</th>
             <th>Full Name</th>
             <th>Username</th>
             <th>Phone</th>
@@ -38,26 +38,28 @@
       <div class="dialog hidden" id="create-user-dialog">
         <div class="dialog-overlay"></div>
         <div class="dialog-content">
-          <span class="btn close-btn" id="close-create-user-dialog">X</span>
-          <div class="form-header">
-            <h2>Add New User</h2>
-          </div>
+          <button class="close-btn" id="close-create-user-dialog">✕</button>
+          <h3 class="title">Add User</h3>
           <form id="admin-create-user-form">
             <div class="form-group">
               <label>Username</label>
-              <input type="text" id="new-username" />
+              <input
+                type="text"
+                id="new-username"
+                placeholder="Choose username"
+              />
             </div>
             <div class="form-group">
               <label>Full Name</label>
-              <input type="text" id="new-full-name" />
+              <input type="text" id="new-full-name" placeholder="Full name" />
             </div>
             <div class="form-group">
               <label>Phone</label>
-              <input type="tel" id="new-tel" />
+              <input type="tel" id="new-tel" placeholder="Phone number" />
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="password" id="new-password" />
+              <input type="password" id="new-password" placeholder="Password" />
             </div>
             <button type="submit" class="btn btn-large">Create User</button>
           </form>
@@ -67,10 +69,8 @@
       <div class="dialog hidden" id="edit-user-dialog">
         <div class="dialog-overlay"></div>
         <div class="dialog-content">
-          <span class="btn close-btn" id="close-edit-user-dialog">X</span>
-          <div class="form-header">
-            <h2>Edit User</h2>
-          </div>
+          <button class="close-btn" id="close-edit-user-dialog">✕</button>
+          <h3 class="title">Edit User</h3>
           <form id="edit-user-form">
             <div class="form-group">
               <label>Username</label>
@@ -85,8 +85,12 @@
               <input type="tel" id="edit-tel" />
             </div>
             <div class="form-group">
-              <label>New Password (leave blank to keep current)</label>
-              <input type="password" id="edit-password" />
+              <label>New Password (optional)</label>
+              <input
+                type="password"
+                id="edit-password"
+                placeholder="Leave blank to keep current"
+              />
             </div>
             <button type="submit" class="btn btn-large">Save Changes</button>
           </form>

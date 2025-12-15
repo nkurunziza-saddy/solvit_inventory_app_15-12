@@ -4,61 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>register</title>
+    <title>Register</title>
   </head>
   <body class="main-center">
-    <div class="main-container">
-      <div class="form-container">
-        <div class="form-header">
-          <h2>Create Account</h2>
-          <p>Join us today and start your journey</p>
-        </div>
-        <form id="register-form">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Choose a username" />
-          </div>
-
-          <div class="form-group">
-            <label for="full_name">Full Name</label>
-            <input
-              type="text"
-              id="full_name"
-              placeholder="Enter your full name"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="tel">Phone Number</label>
-            <input type="tel" id="tel" placeholder="+250 xxx xxx xxx" />
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Create a strong password"
-            />
-          </div>
-
-          <button class="btn btn-large" type="submit">Create Account</button>
-        </form>
-        <div class="form-footer">
-          <p>Already have an account?</p>
-          <a href="login.html">Sign in</a>
-        </div>
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Create account</h2>
+        <p>Get started with your inventory management</p>
       </div>
-      <aside class="main-aside">
-        <h4 class="logo">Talalala Inc.</h4>
-        <div class="down">
-          <p>
-            "Once you find us, you won't want to leave. The tool is just that
-            good."
-          </p>
-          <p class="by">- Director Mackenzie</p>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Choose a username" />
         </div>
-      </aside>
+        <div class="form-group">
+          <label for="full_name">Full Name</label>
+          <input
+            type="text"
+            id="full_name"
+            placeholder="Enter your full name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tel">Phone Number</label>
+          <input type="tel" id="tel" placeholder="+250 xxx xxx xxx" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Create a password"
+          />
+        </div>
+        <button class="btn btn-large" type="submit">Create account</button>
+      </form>
+      <div class="form-footer">
+        <span>Already have an account?</span>
+        <a href="login.html">Sign in</a>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

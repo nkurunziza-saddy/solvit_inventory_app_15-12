@@ -107,6 +107,10 @@ ge_by_id("register-form")?.addEventListener("submit", (e) => {
     return alert("Username already exists. Please choose another.");
   }
 
+  if (users.some((u) => u.tel === tel)) {
+    return alert("Phone number already exists.");
+  }
+
   storage.insert("users", formData);
   alert("Account created successfully!");
   window.location.href = "login.html";
@@ -377,6 +381,10 @@ ge_by_id("admin-create-user-form")?.addEventListener("submit", (e) => {
   const users = storage.get("users");
   if (users.some((u) => u.username === username)) {
     return alert("Username already exists.");
+  }
+
+  if (users.some((u) => u.tel === tel)) {
+    return alert("Phone number already exists.");
   }
 
   storage.insert("users", { username, full_name, tel, password });
